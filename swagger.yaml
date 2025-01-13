@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: Therapy Journaling API
+  version: 1.0.0
+  description: API for managing therapy sessions, clients, and journals
+paths:
+  /clients:
+    post:
+      summary: Create a new client
+      operationId: createClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+              required:
+                - email
+                - name
+      responses:
+        '201':
+          description: Client created successfully
+  /clients/{clientId}:
+    get:
+      summary: Get client details
+      operationId: getClient
+      parameters:
+        - in: path
+          name: clientId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Client details fetched
+        '404':
+          description: Client not found
+
