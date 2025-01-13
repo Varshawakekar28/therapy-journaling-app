@@ -1,0 +1,86 @@
+paths:
+  /sessions:
+    post:
+      summary: Create a new session
+      operationId: createSession
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientId:
+                  type: string
+                therapistId:
+                  type: string
+                dateTime:
+                  type: string
+                privateNotes:
+                  type: string
+                sharedNotes:
+                  type: string
+              required:
+                - clientId
+                - therapistId
+                - dateTime
+      responses:
+        '201':
+          description: Session created successfully
+
+  /sessions/{sessionId}:
+    get:
+      summary: Get session details
+      operationId: getSession
+      parameters:
+        - in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Session details fetched
+        '404':
+          description: Session not found
+
+  /sessions/{sessionId}:
+    put:
+      summary: Update session details
+      operationId: updateSession
+      parameters:
+        - in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                privateNotes:
+                  type: string
+                sharedNotes:
+                  type: string
+      responses:
+        '200':
+          description: Session updated successfully
+        '404':
+          description: Session not found
+
+  /sessions/{sessionId}/notes:
+    delete:
+      summary: Delete session notes
+      operationId: deleteSessionNotes
+      parameters:
+        - in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Session notes deleted successfully
+        '404':
+          description: Session not found
