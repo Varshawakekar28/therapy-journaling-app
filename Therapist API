@@ -1,0 +1,70 @@
+paths:
+  /therapists:
+    post:
+      summary: Create a new therapist
+      operationId: createTherapist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+                specializations:
+                  type: array
+                  items:
+                    type: string
+                availableSlots:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - email
+                - name
+                - specializations
+      responses:
+        '201':
+          description: Therapist created successfully
+
+  /therapists/{therapistId}:
+    get:
+      summary: Get therapist details
+      operationId: getTherapist
+      parameters:
+        - in: path
+          name: therapistId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Therapist details fetched
+        '404':
+          description: Therapist not found
+
+  /therapists/{therapistId}/clients:
+    post:
+      summary: Add a client to a therapist
+      operationId: addClientToTherapist
+      parameters:
+        - in: path
+          name: therapistId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientId:
+                  type: string
+      responses:
+        '200':
+          description: Client added to therapist successfully
+        '404':
+          description: Therapist not found

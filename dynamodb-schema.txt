@@ -1,0 +1,33 @@
+--- DynamoDB Schema Design ---
+
+1. **Client Table**:
+   - **Primary Key**: 
+     - Partition Key: `clientId` (String)
+   - **Attributes**:
+     - `email` (String)
+     - `name` (String)
+     - `createdAt` (String)
+     - `mappedTherapists` (List)
+
+2. **Therapist Table**:
+   - **Primary Key**: 
+     - Partition Key: `therapistId` (String)
+   - **Attributes**:
+     - `email` (String)
+     - `name` (String)
+     - `specializations` (List)
+     - `availableSlots` (List)
+
+3. **Session Table**:
+   - **Primary Key**: 
+     - Partition Key: `sessionId` (String)
+   - **Attributes**:
+     - `clientId` (String)
+     - `therapistId` (String)
+     - `dateTime` (String)
+     - `privateNotes` (String)
+     - `sharedNotes` (String)
+
+4. **Indexes**:
+   - **GSI (Global Secondary Index)** for searching sessions by `clientId` and `dateTime`.
+   - **LSI (Local Secondary Index)** for searching sessions by `therapistId` and `dateTime`.
